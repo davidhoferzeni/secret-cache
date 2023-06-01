@@ -1,10 +1,12 @@
-import { Loader } from "@googlemaps/js-api-loader";
-import { initMap, trackTarget } from "./distance";
+import { trackTarget } from "./distance";
+import { trackOrientation } from "./compass";
 
-const loader = new Loader({
-  apiKey: "YOUR_API_KEY",
-  version: "weekly",
-});
-await loader.load();
-initMap();
-trackTarget();
+const startButton = document.getElementById("start");
+if (!startButton) {
+  alert("Error!");
+} else {
+  startButton.onclick = () => {
+    trackTarget();
+    trackOrientation();
+  };
+}

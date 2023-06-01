@@ -1,22 +1,21 @@
 {
   "include": ["src/**/*"],
   "compilerOptions": {
-    "importsNotUsedAsValues": "error",
-    "isolatedModules": true,
-    "preserveValueImports": true,
     "lib": ["esnext", "DOM", "DOM.Iterable"],
-    "moduleResolution": "node",
     "module": "esnext",
     "target": "esnext",
-    "ignoreDeprecations": "5.0",
     "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmitOnError": true,
     "checkJs": true,
+    "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   }
 }

@@ -1,4 +1,4 @@
-import dts from "vite-plugin-dts";
+import basicSsl from "@vitejs/plugin-basic-ssl";
 
 export default {
   root: "src",
@@ -6,5 +6,8 @@ export default {
     target: "esnext",
     outDir: "../dist",
   },
-  plugins: [dts({ tsConfigFilePath: "../tsconfig.json" })],
+  server: {
+    https: true,
+  },
+  plugins: [basicSsl()],
 };
