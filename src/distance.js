@@ -1,5 +1,6 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import config from "./config.json";
+import { watchPosition } from "ovid-core-ts";
 
 /**
  * @type {number}
@@ -9,7 +10,6 @@ let id;
  * @type {GeolocationCoordinates}
  */
 let target;
-let options;
 /**
  * @type {HTMLElement | null}
  */
@@ -43,13 +43,6 @@ function success(pos) {
   infoField.textContent = `Got position: ${crd.latitude}/${crd.longitude}, accuracy is ${crd.accuracy}, distance is ${distance}m, targetHeading is ${targetHeading}, heading is ${crd.heading}°`;
 }
 
-/**
- * @param {GeolocationPositionError} err
- */
-function error(err) {
-  console.error(`ERROR(${err.code}): ${err.message}`);
-}
-
 export async function trackTarget() {
   await initLoader();
   await initMap();
@@ -62,14 +55,10 @@ export async function trackTarget() {
     heading: null,
     speed: null,
   };
-
-  options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
-
-  id = navigator.geolocation.watchPosition(success, error, options);
+  const trackingSucceeded = watchPosition(success);
+  if (!trackingSucceeded) {
+    alert("Issue when tracking!");
+  }
   infoField = document.getElementById("distance");
 }
 
